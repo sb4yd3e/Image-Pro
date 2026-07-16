@@ -81,6 +81,27 @@ final class ModelStoreTests: XCTestCase {
         try? FileManager.default.removeItem(at: temporary)
     }
 
+    func testInstallingNewVersionReplacesStaleActiveSelection() throws {
+        let temporary = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString, isDirectory: true)
+        defer { try? FileManager.default.removeItem(at: temporary) }
+        let storeRoot = temporary.appendingPathComponent("store", isDirectory: true)
+        let store = ModelStore(rootURL: storeRoot)
+
+        let first = try makePackage(id: "upgrade-test", version: "1", inside: temporary)
+        _ = try store.installPackage(at: first)
+        try FileManager.default.removeItem(
+            at: storeRoot.appendingPathComponent("Packages/upgrade-test/1", isDirectory: true)
+        )
+        XCTAssertNil(try store.resolveActiveModel(for: .upscale))
+
+        let second = try makePackage(id: "upgrade-test", version: "2", inside: temporary)
+        _ = try store.installPackage(at: second)
+        let active = try XCTUnwrap(store.activeModel(for: .upscale))
+        XCTAssertEqual(active.manifest.version, "2")
+        XCTAssertEqual(try store.resolveActiveModel(for: .upscale)?.lastPathComponent, "Model.mlmodelc")
+    }
+
     func testRejectsEntrypointOutsidePackage() throws {
         let temporary = FileManager.default.temporaryDirectory
             .appendingPathComponent(UUID().uuidString, isDirectory: true)
@@ -120,5 +141,28 @@ final class ModelStoreTests: XCTestCase {
             ModelValidator.sha256(of: data)
         )
         try? FileManager.default.removeItem(at: url)
+    }
+
+    private func makePackage(id: String, version: String, inside root: URL) throws -> URL {
+        let package = root.appendingPathComponent("\(id)-\(version).imagepromodel", isDirectory: true)
+        let payload = package.appendingPathComponent("payload/Model.mlmodelc", isDirectory: true)
+        try FileManager.default.createDirectory(at: payload, withIntermediateDirectories: true)
+        try Data("model-\(version)".utf8).write(to: payload.appendingPathComponent("weights.bin"))
+        let manifest = ModelPackageManifest(
+            id: id,
+            displayName: "Upgrade Test",
+            version: version,
+            capabilities: [.upscale],
+            engine: .coreML,
+            minimumOS: "14.0",
+            minimumMemoryGB: 1,
+            license: "MIT",
+            entrypoint: "payload/Model.mlmodelc",
+            installedBytes: 0
+        )
+        try JSONEncoder().encode(manifest).write(
+            to: package.appendingPathComponent(ModelStore.manifestFilename)
+        )
+        return package
     }
 }

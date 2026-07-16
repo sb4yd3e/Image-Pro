@@ -185,9 +185,8 @@ final class ModelManagerController: ObservableObject {
     }
 
     func hasActiveModel(for capability: ModelCapability, engines: Set<ModelEngine>) -> Bool {
-        installedModels.contains {
-            $0.activeCapabilities.contains(capability) && engines.contains($0.manifest.engine)
-        }
+        guard let active = try? store.activeModel(for: capability) else { return false }
+        return engines.contains(active.manifest.engine)
     }
 
     private func loadBundledCatalog() {

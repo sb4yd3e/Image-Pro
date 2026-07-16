@@ -266,7 +266,9 @@ public final class ModelStore: @unchecked Sendable {
         try fileManager.moveItem(at: source, to: target)
 
         var active = try readActiveFile()
-        for capability in manifest.capabilities where active.capabilities[capability.rawValue] == nil {
+        // Installing a pack is an explicit user action. Make the newly installed
+        // version active even when active.json contains a stale/deleted version.
+        for capability in manifest.capabilities {
             active.capabilities[capability.rawValue] = ActiveModelRecord(id: manifest.id, version: manifest.version)
         }
         try writeActiveFile(active)

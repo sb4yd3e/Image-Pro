@@ -24,7 +24,7 @@
 - [x] Metadata policy, atomic export และ batch optimizer core
 - [x] Operation graph, project package, model manifest/checksum และ queue state core
 - [x] Vision foreground provider และ Remove Background action ใน app
-- [x] Core tests 65/65 ผ่าน ครอบคลุม Model Store/ZIP import, inference โมเดลจริง, OCR, batch recipe, Vision fallback และ golden-image regression
+- [x] Core tests 66/66 ผ่าน ครอบคลุม Model Store/ZIP import/stale active recovery, inference โมเดลจริง, OCR, batch recipe, Vision fallback และ golden-image regression
 - [x] WebP lossy/lossless/alpha/target-size ผ่าน static libwebp 1.6.0 โดยไม่ต้องพึ่ง Homebrew runtime
 - [x] Crop preset/free, Resize Fit/Fill/Stretch, Rotate/Flip เชื่อมกับ operation graph แบบ non-destructive
 - [x] Undo/Redo/Revert และ Before/After segmented toggle ทำงานใน UI จริง
@@ -99,6 +99,7 @@
 - สร้างแพ็ก LaMa 36 MB, Real-ESRGAN 30 MB และ Stable Diffusion แยกจากแอป; release app ใหม่ 6.6 MB และ strict codesign ผ่าน
 - แก้ Model Catalog HTTP 404 ที่เคยแสดง `NSURLError -1011`: เก็บ HTTP status จริง, แสดงคำแนะนำแทน error ดิบ และ fallback ไป bundled/cached catalog เมื่อออนไลน์ไม่ได้
 - ปรับ Settings เป็น content-sized window ตามแท็บ (General 650×418, Models 650×458 เมื่อมีหนึ่งโมเดล), จัดเนื้อหาชิดบน และให้ Manage Models เปิดแท็บ Models โดยตรง
+- แก้ CFNetwork download temp lifetime โดยย้ายไฟล์ไป Application Support ก่อนตรวจ checksum/ติดตั้ง, auto-activate แพ็กใหม่ทับ stale selection และให้หน้าเครื่องมือตรวจ active entrypoint จาก Model Store จริง
 
 ### 2026-07-15
 
