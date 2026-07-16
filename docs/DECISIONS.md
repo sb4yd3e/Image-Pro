@@ -68,7 +68,7 @@
 ## ADR-009 — Bundle LaMa and Stable Diffusion model resources
 
 - Date: 2026-07-15
-- Status: Accepted for personal build
+- Status: Superseded by ADR-011
 - Context: ผู้ใช้ต้องการเปิดแอปแล้วใช้งาน offline ทันทีและไม่ต้องสนใจขนาด package เพื่อจำหน่าย
 - Decision: ฝัง LaMa 6-bit Core ML และ Stable Diffusion 1.5 compiled resources ใน `.app`; ใช้ Apple `ml-stable-diffusion` 1.1.1, `reduceMemory` และ unload หลังจบงาน
 - Consequences: release app ประมาณ 2.1 GB แต่ Erase, Generative Fill และ Outpaint ไม่ต้องดาวน์โหลดอะไรตอนใช้งาน
@@ -80,6 +80,16 @@
 - Decision: autosave source, editing base, active render, operation graph และ mask เป็น package ใน Application Support แบบ atomic
 - Reason: AI render ไม่สามารถสร้างซ้ำได้รวดเร็วและ source path อาจถูกย้าย การเก็บ snapshot ทำให้ recovery เชื่อถือได้กว่าเก็บ operation อย่างเดียว
 - Consequences: autosave ใช้พื้นที่เพิ่มใกล้เคียง 2–3 เท่าของภาพที่เปิดล่าสุด
+
+## ADR-011 — Lightweight app with external model packs
+
+- Date: 2026-07-16
+- Status: Accepted
+- Context: app bundle 2.1 GB อัปเดตช้าและต้องดาวน์โหลด weights ซ้ำทุก OTA ขณะที่ model family เปลี่ยนเร็วกว่าตัว editor
+- Decision: `.app` ไม่ฝัง AI weights; ใช้ Model Manager, versioned package manifest, Application Support store, catalog SHA-256, compatibility validation, per-capability activation และ rollback
+- Alternatives: ฝัง weights ต่อ, ดาวน์โหลดแบบไม่มี catalog หรือพึ่ง shared Python environment
+- Consequences: app เหลือประมาณ 6.6 MB ผู้ใช้ติดตั้งเฉพาะโมเดลที่ต้องใช้ งานประมวลผลยัง offline หลังติดตั้ง และ engine family ใหม่ต้องมากับ app/provider OTA ก่อน
+- Trigger to revisit: macOS รองรับ system model ที่คุณภาพเพียงพอโดยไม่ต้องจัดการ weights เอง
 
 ## ADR template
 

@@ -10,8 +10,8 @@
 
 - Phase ปัจจุบัน: usable offline build ครบ workflow หลัก Phase 1–5 และรอบ stability/UX
 - Platform เป้าหมาย: Apple Silicon, macOS 14+
-- Network policy: ประมวลผลรูปภายในเครื่องทั้งหมด; network ใช้เฉพาะการเช็ก GitHub Release ที่ปิดได้
-- Version: 0.2.0
+- Network policy: ประมวลผลรูปภายในเครื่องทั้งหมด; network ใช้เฉพาะ OTA และการดาวน์โหลด model pack ตามคำสั่งผู้ใช้
+- Version: 0.3.0
 - วันที่ปรับปรุงล่าสุด: 2026-07-16
 
 ## เอกสารหลัก
@@ -58,6 +58,7 @@
 - Optimize/Target Size เป็น JPEG, PNG, HEIC, WebP, AVIF หรือ TIFF ตาม codec ที่เครื่องรองรับ
 - Optimize ทำ conversion เป็น preview ก่อนโดยยังไม่เขียนไฟล์ เพื่อดู Before/After และขนาดจริง; Export จาก toolbar หรือ `⌘E` จึงเปิด Save panel
 - OTA update จาก GitHub Releases พร้อมตรวจ SHA-256 และ bundle/version ก่อนติดตั้ง
+- Model Manager แยกดาวน์โหลด/นำเข้า/เลือกเวอร์ชัน/ลบโมเดลภายหลัง โดยเก็บใน Application Support และตรวจ compatibility/checksum ก่อนใช้
 
 ## วิธีอัปเดตสถานะ
 
@@ -96,16 +97,28 @@ swift run imagepro-probe --compare-images actual.png baseline.png --output compa
 
 WebP encoding ใช้ static `libwebp` ที่ฝังใน executable แล้ว ไม่ต้องติดตั้ง Homebrew เพื่อเปิดแอปที่ build เสร็จ
 
-Release build อยู่ที่ `dist/Image Pro.app` และฝังโมเดลทั้งหมดแล้ว (ประมาณ 2.1 GB) ดูวิธีใช้ที่ [User guide](docs/USER_GUIDE.md) และข้อจำกัดที่ [Known issues](docs/KNOWN_ISSUES.md)
+Release build อยู่ที่ `dist/Image Pro.app` และไม่ฝังโมเดล AI ขนาดใหญ่ ตัวแอปประมาณ 6.6 MB ดูวิธีใช้ที่ [User guide](docs/USER_GUIDE.md) และข้อจำกัดที่ [Known issues](docs/KNOWN_ISSUES.md)
+
+สำหรับ binary ส่วนตัวที่เผยแพร่บน GitHub ให้ดาวน์โหลด `Image-Pro-0.3.0.zip`, แตกไฟล์ แล้วลาก `Image Pro.app` ไปไว้ใน Applications เนื่องจาก build นี้ยังไม่มี Developer ID/notarization การเปิดครั้งแรกให้คลิกขวาที่แอปแล้วเลือก **Open** หาก macOS ยังบล็อก ให้เปิด **System Settings → Privacy & Security → Open Anyway**
+
+## สร้างและติดตั้ง model pack
+
+```bash
+sh Scripts/package-models.sh
+```
+
+คำสั่งนี้สร้าง ZIP, SHA-256 และ catalog สำหรับโมเดลเดิมไว้ที่ `dist/model-packs/` เปิดแอปแล้วกด `⌘,` → **Models** → **Import Model Pack…** เพื่อเลือก ZIP ที่ต้องการ โมเดลถูกติดตั้งไว้ใต้ `~/Library/Application Support/Image Pro/Models/` และใช้งานออฟไลน์หลังติดตั้ง
+
+เมื่อต้องการเผยแพร่ model pack ผ่าน GitHub Release ให้อัปโหลด ZIP ทั้งสามและไฟล์ `.sha256` จากนั้นนำ `dist/model-packs/catalog.json` ไปแทน `ModelCatalog/catalog.json` ใน release branch ตัวแอปจะอ่าน catalog นี้เมื่อผู้ใช้กด **Check Catalog**
 
 ## สร้าง GitHub Release สำหรับ OTA
 
 ```bash
 sh Scripts/package-release.sh
-gh release create v0.2.0 \
-  dist/releases/Image-Pro-0.2.0.zip \
-  dist/releases/Image-Pro-0.2.0.zip.sha256 \
-  --title "Image Pro 0.2.0" --generate-notes
+gh release create v0.3.0 \
+  dist/releases/Image-Pro-0.3.0.zip \
+  dist/releases/Image-Pro-0.3.0.zip.sha256 \
+  --title "Image Pro 0.3.0" --generate-notes
 ```
 
 Updater ต้องพบทั้งไฟล์ ZIP และไฟล์ชื่อเดียวกันต่อท้าย `.sha256` ใน stable GitHub Release จึงจะยอมติดตั้ง รุ่นที่ดาวน์โหลดต้องใหม่กว่าและใช้ bundle identifier เดียวกัน หากวางแอปในตำแหน่งที่เขียนทับไม่ได้ ระบบจะแสดงไฟล์ที่เตรียมไว้ใน Finder แทน

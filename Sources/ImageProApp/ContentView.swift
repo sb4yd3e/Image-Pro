@@ -103,7 +103,9 @@ private struct ProcessingBlocker: View {
 }
 
 private struct TopToolbar: View {
+    @Environment(\.openSettings) private var openSettings
     @EnvironmentObject private var model: AppModel
+    @EnvironmentObject private var settingsNavigation: SettingsNavigationController
     @AppStorage(AppLanguage.storageKey) private var languageRawValue = AppLanguage.english.rawValue
 
     private var appLanguage: AppLanguage {
@@ -170,7 +172,10 @@ private struct TopToolbar: View {
                 }
                 .disabled(appLanguage == .thai)
                 Divider()
-                SettingsLink {
+                Button {
+                    settingsNavigation.showGeneral()
+                    openSettings()
+                } label: {
                     Label("Language & Appearance", systemImage: "gearshape")
                 }
             } label: {
@@ -1006,6 +1011,7 @@ private struct OCRInspector: View {
 
 private struct GenerateInspector: View {
     @EnvironmentObject private var model: AppModel
+    @EnvironmentObject private var modelManager: ModelManagerController
     @State private var mode = GenerationMode.fill
     @State private var prompt = ""
     @State private var negativePrompt = ""
@@ -1037,6 +1043,11 @@ private struct GenerateInspector: View {
                     .font(.title2.bold())
                 Text("Paint a mask on the image, then describe what should appear inside it. Generation runs locally with Stable Diffusion.")
                     .foregroundStyle(.secondary)
+                RequiredModelNotice(
+                    capability: .generate,
+                    engines: [.appleStableDiffusion],
+                    available: hasGenerateModel
+                )
 
                 Picker("Mode", selection: $mode) {
                     ForEach(GenerationMode.allCases) { item in
@@ -1210,6 +1221,7 @@ private struct GenerateInspector: View {
                             || (mode == .fill && model.maskDocument.isEmpty)
                             || (mode == .fill && !model.maskDocument.hasPaintedContent)
                             || model.isWorking
+                            || !hasGenerateModel
                     )
                 }
             }
@@ -1231,10 +1243,15 @@ private struct GenerateInspector: View {
             variantCount: variantCount
         )
     }
+
+    private var hasGenerateModel: Bool {
+        modelManager.hasActiveModel(for: .generate, engines: [.appleStableDiffusion])
+    }
 }
 
 private struct UpscaleInspector: View {
     @EnvironmentObject private var model: AppModel
+    @EnvironmentObject private var modelManager: ModelManagerController
     @State private var scale = 2
 
     var body: some View {
@@ -1243,7 +1260,11 @@ private struct UpscaleInspector: View {
                 .font(.title2.bold())
             Text("Real-ESRGAN enhances overlapping tiles locally through Core ML and combines them into a seamless image.")
                 .foregroundStyle(.secondary)
-            Label("Bundled offline model", systemImage: "checkmark.shield")
+            RequiredModelNotice(
+                capability: .upscale,
+                engines: [.coreML],
+                available: hasUpscaleModel
+            )
             Picker("Output scale", selection: $scale) {
                 Text("2×").tag(2)
                 Text("4×").tag(4)
@@ -1279,13 +1300,18 @@ private struct UpscaleInspector: View {
             }
             .buttonStyle(.borderedProminent)
             .controlSize(.large)
-            .disabled(model.activeData == nil || model.isWorking)
+            .disabled(model.activeData == nil || model.isWorking || !hasUpscaleModel)
         }
+    }
+
+    private var hasUpscaleModel: Bool {
+        modelManager.hasActiveModel(for: .upscale, engines: [.coreML])
     }
 }
 
 private struct EraseInspector: View {
     @EnvironmentObject private var model: AppModel
+    @EnvironmentObject private var modelManager: ModelManagerController
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -1293,6 +1319,11 @@ private struct EraseInspector: View {
                 .font(.title2.bold())
             Text("Paint over the complete object and its shadow. Smart Erase expands the mask, rebuilds surrounding texture, and blends edges entirely offline.")
                 .foregroundStyle(.secondary)
+            RequiredModelNotice(
+                capability: .erase,
+                engines: [.coreML],
+                available: hasEraseModel
+            )
             Picker("Brush mode", selection: $model.brushPaintsMask) {
                 Text("Add Mask").tag(true)
                 Text("Subtract").tag(false)
@@ -1335,8 +1366,51 @@ private struct EraseInspector: View {
             }
             .buttonStyle(.borderedProminent)
             .controlSize(.large)
-            .disabled(model.activeData == nil || !model.maskDocument.hasPaintedContent || model.isWorking)
+            .disabled(
+                model.activeData == nil || !model.maskDocument.hasPaintedContent ||
+                    model.isWorking || !hasEraseModel
+            )
         }
+    }
+
+    private var hasEraseModel: Bool {
+        modelManager.hasActiveModel(for: .erase, engines: [.coreML])
+    }
+}
+
+private struct RequiredModelNotice: View {
+    @Environment(\.openSettings) private var openSettings
+    @EnvironmentObject private var settingsNavigation: SettingsNavigationController
+    let capability: ModelCapability
+    let engines: Set<ModelEngine>
+    let available: Bool
+
+    var body: some View {
+        HStack(spacing: 8) {
+            Label {
+                Text(LocalizedStringKey(available ? "Offline model ready" : "Model required"))
+            } icon: {
+                Image(systemName: available ? "checkmark.shield.fill" : "shippingbox")
+            }
+            .foregroundStyle(available ? Color.green : Color.orange)
+            Spacer()
+            if !available {
+                Button {
+                    settingsNavigation.showModels()
+                    openSettings()
+                } label: {
+                    Text("Manage Models")
+                }
+                .controlSize(.small)
+            }
+        }
+        .font(.callout)
+        .padding(10)
+        .background(
+            (available ? Color.green : Color.orange).opacity(0.08),
+            in: RoundedRectangle(cornerRadius: 10)
+        )
+        .accessibilityLabel("\(capability.displayName) model \(available ? "ready" : "required")")
     }
 }
 

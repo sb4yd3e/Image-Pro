@@ -73,9 +73,9 @@ Exit criteria:
 - ลบวัตถุเล็ก/กลางใน photo test set ได้
 - Undo stroke และ undo applied result ทำงานถูกต้อง
 
-## Phase 4 — Generative fill and outpainting
+## Phase 4 — Generative fill, outpainting and model lifecycle
 
-- [x] Bundled model manifests/notices และ checksum validation core; import UI ไม่จำเป็นสำหรับ personal build
+- [x] External model manifests, catalog, checksum validation และ Model Manager สำหรับ import/download/activate/remove/rollback
 - [x] Stable Diffusion provider
 - [x] Prompt/negative prompt/seed
 - [x] Variant filmstrip
@@ -88,6 +88,15 @@ Exit criteria:
 - Inpainting ทำงาน offline เต็มรูปแบบ
 - Cancel และ recovery ไม่ทำ project เสีย
 - model missing/incompatible state อธิบายได้ชัดเจน
+
+## Phase 6 — Smart provider routing
+
+- [ ] SAM 2.1 click/box segmentation pack
+- [ ] PP-OCR Thai/Latin provider และ confidence routing
+- [ ] PaddleOCR-VL ผ่าน MLX-VLM model host สำหรับเอกสารซับซ้อน
+- [ ] FLUX.2 Klein 4B MLX provider สำหรับ Generate/Edit
+- [ ] FLUX.1 Fill quality provider สำหรับ mask-based removal
+- [ ] Router เลือก Fast/Quality provider จาก mask size, texture, memory และ benchmark
 
 ## Phase 5 — Polish
 

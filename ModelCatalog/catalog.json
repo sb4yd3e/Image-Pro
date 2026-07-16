@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-07-16",
+  "packages": [
+    {
+      "package": {
+        "schemaVersion": 1,
+        "id": "lama-coreml",
+        "displayName": "LaMa Smart Erase",
+        "version": "1.0.0",
+        "capabilities": ["erase"],
+        "engine": "coreml",
+        "minimumOS": "14.0",
+        "minimumMemoryGB": 8,
+        "license": "Apache-2.0",
+        "entrypoint": "payload/LaMa.mlmodelc",
+        "installedBytes": 39866368
+      },
+      "archiveURL": "https://github.com/sb4yd3e/Image-Pro/releases/download/models-v1/lama-coreml.zip",
+      "archiveSHA256": "9a78685a546c1bca8181984fb9f45a323be68cb6f527a908bef0e472c5c5d16a",
+      "archiveBytes": 37394284,
+      "releaseNotes": "Initial separate model pack"
+    },
+    {
+      "package": {
+        "schemaVersion": 1,
+        "id": "realesrgan-x4plus-coreml",
+        "displayName": "Real-ESRGAN x4plus",
+        "version": "1.0.0",
+        "capabilities": ["upscale"],
+        "engine": "coreml",
+        "minimumOS": "15.0",
+        "minimumMemoryGB": 8,
+        "license": "BSD-3-Clause",
+        "entrypoint": "payload/RealESRGAN-x4plus.mlmodelc",
+        "installedBytes": 34095104
+      },
+      "archiveURL": "https://github.com/sb4yd3e/Image-Pro/releases/download/models-v1/realesrgan-x4plus-coreml.zip",
+      "archiveSHA256": "e7c182d38312849224ae8302aba97f1c84fb3c86c7278ceca3849964c4f1264a",
+      "archiveBytes": 31033837,
+      "releaseNotes": "Initial separate model pack"
+    },
+    {
+      "package": {
+        "schemaVersion": 1,
+        "id": "stable-diffusion-15-coreml",
+        "displayName": "Stable Diffusion 1.5 Core ML",
+        "version": "1.0.0",
+        "capabilities": ["generate"],
+        "engine": "apple-stable-diffusion",
+        "minimumOS": "14.0",
+        "minimumMemoryGB": 16,
+        "license": "CreativeML-OpenRAIL-M",
+        "entrypoint": "payload/StableDiffusion",
+        "installedBytes": 2135678976
+      },
+      "archiveURL": "https://github.com/sb4yd3e/Image-Pro/releases/download/models-v1/stable-diffusion-15-coreml.zip",
+      "archiveSHA256": "a9b5b5aa7a76ca8b8a296bacd7ef84edec28839674fc4d1e749b42f6538f21c9",
+      "archiveBytes": 1971802618,
+      "releaseNotes": "Initial separate model pack"
+    }
+  ]
+}

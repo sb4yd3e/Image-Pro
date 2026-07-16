@@ -94,12 +94,40 @@ final class ImageProAppDelegate: NSObject, NSApplicationDelegate {
     }
 }
 
+@MainActor
+private enum AboutPanelPresenter {
+    static func show() {
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .center
+        paragraph.paragraphSpacing = 4
+        let credits = NSAttributedString(
+            string: "Built out of laziness\nAttapon Mongkon",
+            attributes: [
+                .font: NSFont.systemFont(ofSize: 12),
+                .foregroundColor: NSColor.secondaryLabelColor,
+                .paragraphStyle: paragraph
+            ]
+        )
+        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+            ?? "0.3.0"
+        NSApp.orderFrontStandardAboutPanel(options: [
+            .applicationName: "Image Pro",
+            .applicationVersion: version,
+            .version: "",
+            .credits: credits
+        ])
+        NSApp.activate(ignoringOtherApps: true)
+    }
+}
+
 @main
 struct ImageProApp: App {
     @NSApplicationDelegateAdaptor(ImageProAppDelegate.self) private var appDelegate
     @StateObject private var model = AppModel()
     @StateObject private var openFileCoordinator = OpenFileCoordinator.shared
     @StateObject private var updateController = UpdateController()
+    @StateObject private var modelManager = ModelManagerController()
+    @StateObject private var settingsNavigation = SettingsNavigationController()
     @AppStorage(AppLanguage.storageKey) private var languageRawValue = AppLanguage.english.rawValue
 
     private var appLanguage: AppLanguage {
@@ -116,6 +144,8 @@ struct ImageProApp: App {
                 .environmentObject(model)
                 .environmentObject(openFileCoordinator)
                 .environmentObject(updateController)
+                .environmentObject(modelManager)
+                .environmentObject(settingsNavigation)
                 .environment(\.locale, appLanguage.locale)
                 .frame(minWidth: 1_180, minHeight: 720)
                 .task { updateController.checkAutomaticallyIfNeeded() }
@@ -124,6 +154,11 @@ struct ImageProApp: App {
         .defaultSize(width: 1_240, height: 780)
         .environment(\.locale, appLanguage.locale)
         .commands {
+            CommandGroup(replacing: .appInfo) {
+                Button("About Image Pro") {
+                    AboutPanelPresenter.show()
+                }
+            }
             CommandGroup(replacing: .newItem) {
                 Button("Open Image…") {
                     model.chooseImage()
@@ -218,7 +253,10 @@ struct ImageProApp: App {
         Settings {
             AppSettingsView()
                 .environmentObject(updateController)
+                .environmentObject(modelManager)
+                .environmentObject(settingsNavigation)
                 .environment(\.locale, appLanguage.locale)
         }
+        .windowResizability(.contentSize)
     }
 }

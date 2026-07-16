@@ -62,8 +62,11 @@ Status: Todo / Doing / Blocked / Done
 | ERA-002 | P0 | Done | Context crop planner | edge/center mask planning | ERA-001 |
 | ERA-003 | P0 | Done | Composite/apply | original dimensions + mask-only blend | ERA-002 |
 | ERA-004 | P1 | Done | Generate Again variants | rerun current fill/outpaint configuration | ERA-003 |
-| MOD-001 | P1 | Done | Bundled model inventory/validation | notices + SHA manifest core; import UI out of personal-build scope | SET-003 |
+| MOD-001 | P1 | Done | External model inventory/validation | manifests + SHA + separate ZIP packs | SET-003 |
 | MOD-002 | P1 | Done | Model lifecycle | Stable Diffusion reduce-memory + unload after run | MOD-001 |
+| MOD-003 | P0 | Done | Model Manager | import/download/activate/remove/rollback + compatibility validation | MOD-001 |
+| MOD-004 | P1 | Todo | Signed remote catalog | publish packs and pin catalog signing key | MOD-003 |
+| MOD-005 | P1 | Todo | MLX model host | isolated process, JSON IPC, unload by process exit | MOD-003 |
 | GEN-001 | P1 | Done | Stable Diffusion provider | local Core ML inference smoke test | MOD-001 |
 | GEN-002 | P1 | Done | Masked fill pipeline | image+mask+prompt result | GEN-001 |
 | GEN-003 | P1 | Done | Prompt/seed/variants UI | filmstrip + apply/discard | GEN-002 |
@@ -75,6 +78,9 @@ Status: Todo / Doing / Blocked / Done
 | OCR-002 | P0 | Done | OCR workflow UI | boxes + editable text + copy/TXT export | OCR-001 |
 | OCR-003 | P1 | Todo | Multilingual/handwriting benchmark | CER/WER dataset ไทย/อังกฤษพิมพ์และลายมือ | OCR-001 |
 | OCR-004 | P2 | Todo | PaddleOCR provider spike | เพิ่มเมื่อ OCR-003 ยืนยัน gap ของ Vision | OCR-003 |
+| OCR-005 | P1 | Todo | PaddleOCR-VL MLX provider | document/handwriting fallback + no-image-data network test | MOD-005 |
+| ERA-006 | P1 | Todo | SAM 2.1 + quality inpaint | click/box mask and FLUX Fill comparison | MOD-005 |
+| GEN-007 | P1 | Todo | FLUX.2 Klein 4B provider | int4 MLX generation/edit on M1 Pro 32 GB | MOD-005 |
 | QA-001 | P0 | Done | Golden image harness | pixel/tolerance JSON comparator + tests | SET-002 |
 | QA-002 | P0 | Done | Benchmark harness | time + peak memory JSON report | SET-002 |
 | QA-003 | P0 | Done | Offline architecture test | image-processing core ไม่มี network client API; updater แยก app boundary | SET-001 |

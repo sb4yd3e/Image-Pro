@@ -9,6 +9,9 @@
 - Upscale 4× ทำให้จำนวนพิกเซลเพิ่ม 16 เท่า ภาพต้นฉบับใหญ่อาจใช้ RAM สูง ควรเริ่ม 2×
 - WebP export ไม่เก็บ metadata เดิม ส่วน JPEG/PNG/HEIC/TIFF ใช้ metadata policy ของ Optimize
 - OCR ใช้ภาษาที่ Apple Vision บน macOS รุ่นนั้นรองรับและไม่รับประกันลายมือทุกแบบ ควรตรวจแก้ผลก่อนใช้; PaddleOCR เป็น optional provider หลังมี CER/WER benchmark
-- ยังไม่มี Photo/Anime model switch, BiRefNet fallback และ import model ผ่าน UI; เป็น optional enhancement ไม่ขวาง workflow หลัก
+- ยังไม่มี Photo/Anime model switch และ BiRefNet fallback; เป็น optional enhancement ไม่ขวาง workflow หลัก ส่วน Model Manager รองรับ import/download/activate/remove แล้ว
 - Finder Services อาจปรากฏหลัง LaunchServices refresh หรือเปิดแอปหนึ่งครั้ง และตำแหน่งเมนูขึ้นกับการตั้งค่า Extensions/Services ของ macOS
 - ยังต้องทำ visual benchmark กับชุดภาพจริง 30/100 ภาพและทดสอบเครื่อง RAM ต่ำก่อนถือเป็น release สำหรับผู้อื่น
+- Binary ส่วนตัวยังใช้ ad-hoc code signing เพราะเครื่องไม่มี Developer ID Application certificate/notarization ผู้ใช้ที่ดาวน์โหลด ZIP จาก GitHub ต้องคลิกขวา → Open หรืออนุญาตผ่าน Privacy & Security ในการเปิดครั้งแรก
+- Remote model catalog ชี้ไป GitHub Release `models-v1`; ถ้า asset ถูกย้ายหรือลบ Check Catalog จะยังแสดงรายการจาก cache แต่การดาวน์โหลด pack นั้นจะล้มเหลว
+- Model Manager รองรับ Core ML/Apple Stable Diffusion packs ที่ใช้งานอยู่แล้ว ส่วน MLX runtime สำหรับ FLUX.2/PaddleOCR-VL ยังอยู่ใน backlog และต้องมากับ app OTA ก่อนดาวน์โหลด weights รุ่นนั้น

@@ -1,0 +1,13 @@
+{
+  "schemaVersion" : 1,
+  "id" : "realesrgan-x4plus-coreml",
+  "displayName" : "Real-ESRGAN x4plus",
+  "version" : "1.0.0",
+  "capabilities" : ["upscale"],
+  "engine" : "coreml",
+  "minimumOS" : "15.0",
+  "minimumMemoryGB" : 8,
+  "license" : "BSD-3-Clause",
+  "entrypoint" : "payload/RealESRGAN-x4plus.mlmodelc",
+  "installedBytes" : 34095104
+}

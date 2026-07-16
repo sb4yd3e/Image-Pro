@@ -1,0 +1,13 @@
+{
+  "schemaVersion" : 1,
+  "id" : "stable-diffusion-15-coreml",
+  "displayName" : "Stable Diffusion 1.5 Core ML",
+  "version" : "1.0.0",
+  "capabilities" : ["generate"],
+  "engine" : "apple-stable-diffusion",
+  "minimumOS" : "14.0",
+  "minimumMemoryGB" : 16,
+  "license" : "CreativeML-OpenRAIL-M",
+  "entrypoint" : "payload/StableDiffusion",
+  "installedBytes" : 2135678976
+}

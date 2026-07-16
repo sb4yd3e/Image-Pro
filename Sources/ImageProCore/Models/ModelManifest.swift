@@ -27,11 +27,24 @@ public enum ModelValidator {
         SHA256.hash(data: data).map { String(format: "%02x", $0) }.joined()
     }
 
+    public static func sha256(fileAt url: URL) throws -> String {
+        let handle = try FileHandle(forReadingFrom: url)
+        defer { try? handle.close() }
+        var hasher = SHA256()
+        while autoreleasepool(invoking: {
+            let data = try? handle.read(upToCount: 4 * 1_024 * 1_024)
+            guard let data, !data.isEmpty else { return false }
+            hasher.update(data: data)
+            return true
+        }) {}
+        return hasher.finalize().map { String(format: "%02x", $0) }.joined()
+    }
+
     public static func validate(fileAt url: URL, manifest: ModelManifest) throws {
         guard FileManager.default.fileExists(atPath: url.path) else {
             throw ModelValidationError.missingFile
         }
-        let actual = sha256(of: try Data(contentsOf: url))
+        let actual = try sha256(fileAt: url)
         guard actual == manifest.sha256 else {
             throw ModelValidationError.checksumMismatch(expected: manifest.sha256, actual: actual)
         }

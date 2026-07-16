@@ -664,8 +664,8 @@ final class AppModel: ObservableObject {
             errorMessage = "Real-ESRGAN requires macOS 15 or later"
             return
         }
-        guard let modelURL = CoreMLModelSupport.bundledModel(named: "RealESRGAN-x4plus") else {
-            errorMessage = "Real-ESRGAN model is missing from the app bundle"
+        guard let modelURL = CoreMLModelSupport.installedModel(for: .upscale) else {
+            errorMessage = "Install and activate an Upscale model in Settings › Models first."
             return
         }
 
@@ -706,8 +706,8 @@ final class AppModel: ObservableObject {
             errorMessage = "Paint the object with Add Mask before running Erase."
             return
         }
-        guard let modelURL = CoreMLModelSupport.bundledModel(named: "LaMa") else {
-            errorMessage = "LaMa model is missing from the app bundle"
+        guard let modelURL = CoreMLModelSupport.installedModel(for: .erase) else {
+            errorMessage = "Install and activate an Erase model in Settings › Models first."
             return
         }
         let mask = maskDocument
@@ -755,7 +755,7 @@ final class AppModel: ObservableObject {
         let baseData = generativeBaseData ?? activeData
         guard let baseData else { return }
         guard let resourcesURL = stableDiffusionResourcesURL else {
-            errorMessage = "Stable Diffusion resources are missing from the app bundle"
+            errorMessage = "Install and activate a Generate model in Settings › Models first."
             return
         }
         let mask = maskDocument
@@ -823,7 +823,7 @@ final class AppModel: ObservableObject {
     ) {
         guard !isWorking, let baseData = generativeBaseData ?? activeData else { return }
         guard let resourcesURL = stableDiffusionResourcesURL else {
-            errorMessage = "Stable Diffusion resources are missing from the app bundle"
+            errorMessage = "Install and activate a Generate model in Settings › Models first."
             return
         }
         generativeBaseData = baseData
@@ -1546,14 +1546,20 @@ final class AppModel: ObservableObject {
     }
 
     private var stableDiffusionResourcesURL: URL? {
-        let bundled = Bundle.main.resourceURL?
-            .appendingPathComponent("Models/StableDiffusion", isDirectory: true)
-        if let bundled, FileManager.default.fileExists(atPath: bundled.path) {
-            return bundled
+        if
+            let installed = InstalledModelLocator.model(for: .generate),
+            installed.manifest.engine == .appleStableDiffusion,
+            let url = InstalledModelLocator.url(for: .generate)
+        {
+            return url
         }
+        #if DEBUG
         let development = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
             .appendingPathComponent("Models/Optional/StableDiffusion", isDirectory: true)
         return FileManager.default.fileExists(atPath: development.path) ? development : nil
+        #else
+        return nil
+        #endif
     }
 
     private nonisolated static func preparedPreview(data: Data) throws -> PreparedPreview {

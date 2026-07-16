@@ -1,0 +1,13 @@
+{
+  "schemaVersion" : 1,
+  "id" : "lama-coreml",
+  "displayName" : "LaMa Smart Erase",
+  "version" : "1.0.0",
+  "capabilities" : ["erase"],
+  "engine" : "coreml",
+  "minimumOS" : "14.0",
+  "minimumMemoryGB" : 8,
+  "license" : "Apache-2.0",
+  "entrypoint" : "payload/LaMa.mlmodelc",
+  "installedBytes" : 39866368
+}

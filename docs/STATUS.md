@@ -4,11 +4,11 @@
 
 ## Current state
 
-- Overall: Usable offline personal build; stability/interaction hardening and GitHub Release OTA implemented
+- Overall: Usable offline personal build; lightweight app, external Model Manager and GitHub Release OTA implemented
 - Active phase: hardening/real-image benchmark หลัง implementation Phase 1–5
 - Reference machine: MacBook Pro M1 Pro 10-core, RAM 32 GB, macOS 26.5.2
 - Blockers: ไม่มี blocker สำหรับการใช้งานส่วนตัวบนเครื่องอ้างอิง
-- Decisions pending: optional PaddleOCR/BiRefNet/Anime model หลังมี benchmark ภาพจริง
+- Decisions pending: SAM 2.1, PaddleOCR-VL และ FLUX.2 Klein provider หลัง runtime/quality benchmark
 
 ## Completed
 
@@ -24,7 +24,7 @@
 - [x] Metadata policy, atomic export และ batch optimizer core
 - [x] Operation graph, project package, model manifest/checksum และ queue state core
 - [x] Vision foreground provider และ Remove Background action ใน app
-- [x] Core tests 61/61 ผ่าน ครอบคลุม inference โมเดลจริง, OCR, batch recipe, Vision fallback และ golden-image regression
+- [x] Core tests 65/65 ผ่าน ครอบคลุม Model Store/ZIP import, inference โมเดลจริง, OCR, batch recipe, Vision fallback และ golden-image regression
 - [x] WebP lossy/lossless/alpha/target-size ผ่าน static libwebp 1.6.0 โดยไม่ต้องพึ่ง Homebrew runtime
 - [x] Crop preset/free, Resize Fit/Fill/Stretch, Rotate/Flip เชื่อมกับ operation graph แบบ non-destructive
 - [x] Undo/Redo/Revert และ Before/After segmented toggle ทำงานใน UI จริง
@@ -64,6 +64,8 @@
 - [x] Smart Erase เพิ่ม adaptive mask expansion/context/feather; Generate เพิ่ม masked prefill/strength tuning และ optional SDXL auto-detection
 - [x] GitHub Release OTA ตรวจ SHA-256/bundle/version, release packaging script, README, MIT license และ blueprint App Icon
 - [x] แก้ Remove Background สำหรับภาพโปสเตอร์/กราฟิกพื้นเรียบด้วย person, edge-connected และ saliency fallback พร้อมข้อความแนะนำแทน error code 0
+- [x] แยก LaMa, Real-ESRGAN และ Stable Diffusion เป็น model pack ภายนอก พร้อม import/download/activate/remove/rollback UI
+- [x] ลด release `.app` จากประมาณ 2.1 GB เหลือ 6.6 MB โดยฟีเจอร์แจ้ง Model required และเปิด Model Manager เมื่อยังไม่ติดตั้ง
 
 ## Next 5 tasks
 
@@ -93,6 +95,10 @@
 - เพิ่ม updater ผ่าน GitHub Releases พร้อม checksum verification และ release packaging
 - สร้าง blueprint App Icon แบบโปร่งใสพร้อม `.icns`, อัปเดต README/MIT/license และเอกสารใช้งาน TH/EN
 - แก้ VisionForegroundError error 0 จากภาพกราฟิกพื้นเรียบ: เพิ่ม bounded retry และ fallback mask หลายขั้น; ทดสอบภาพที่รายงานจริงแล้วพื้นแดงหาย ตัวอักษร/QR อยู่ครบ และ full suite 61/61 ผ่าน
+- เปลี่ยน model lifecycle เป็น external packs: Model Store/manifest/catalog/checksum/compatibility validation, Settings → Models, local import, remote download และ per-feature activation
+- สร้างแพ็ก LaMa 36 MB, Real-ESRGAN 30 MB และ Stable Diffusion แยกจากแอป; release app ใหม่ 6.6 MB และ strict codesign ผ่าน
+- แก้ Model Catalog HTTP 404 ที่เคยแสดง `NSURLError -1011`: เก็บ HTTP status จริง, แสดงคำแนะนำแทน error ดิบ และ fallback ไป bundled/cached catalog เมื่อออนไลน์ไม่ได้
+- ปรับ Settings เป็น content-sized window ตามแท็บ (General 650×418, Models 650×458 เมื่อมีหนึ่งโมเดล), จัดเนื้อหาชิดบน และให้ Manage Models เปิดแท็บ Models โดยตรง
 
 ### 2026-07-15
 

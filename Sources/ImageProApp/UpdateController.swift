@@ -46,7 +46,7 @@ final class UpdateController: ObservableObject {
     private let lastCheckKey = "imagePro.lastUpdateCheck"
 
     var currentVersion: String {
-        Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0.2.0"
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0.3.0"
     }
 
     func checkForUpdates(userInitiated: Bool = true) {

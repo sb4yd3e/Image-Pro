@@ -27,6 +27,13 @@ extension CoreMLImageError: LocalizedError {
 }
 
 public enum CoreMLModelSupport {
+    public static func installedModel(for capability: ModelCapability) -> URL? {
+        guard InstalledModelLocator.model(for: capability)?.manifest.engine == .coreML else {
+            return nil
+        }
+        return InstalledModelLocator.url(for: capability)
+    }
+
     public static func bundledModel(named name: String, bundle: Bundle = .main) -> URL? {
         bundle.url(forResource: name, withExtension: "mlmodelc", subdirectory: "Models")
             ?? bundle.resourceURL?
