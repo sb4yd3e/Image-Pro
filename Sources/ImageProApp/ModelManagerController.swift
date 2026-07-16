@@ -83,16 +83,21 @@ final class ModelManagerController: ObservableObject {
             do {
                 let (temporaryURL, response) = try await URLSession.shared.download(from: item.archiveURL)
                 try Self.validate(response: response, resource: .modelPack)
+                // CFNetwork owns `temporaryURL` and may remove it as soon as the
+                // download callback completes. Move it into our Application Support
+                // staging area before hashing or handing work to a detached task.
+                let stagedArchive = try persistDownloadedArchive(at: temporaryURL)
+                defer { try? FileManager.default.removeItem(at: stagedArchive) }
                 let expected = item.archiveSHA256
                 let actual = try await Task.detached(priority: .utility) {
-                    try ModelValidator.sha256(fileAt: temporaryURL)
+                    try ModelValidator.sha256(fileAt: stagedArchive)
                 }.value
                 guard !expected.isEmpty, actual == expected else {
                     throw ModelPackageError.catalogChecksumMismatch
                 }
                 statusText = "Validating and installing \(item.package.displayName)…"
                 let installed = try await Task.detached(priority: .userInitiated) { [store] in
-                    try store.installPackage(at: temporaryURL)
+                    try store.installPackage(at: stagedArchive)
                 }.value
                 reloadInstalled()
                 statusText = "Installed \(installed.manifest.displayName) \(installed.manifest.version)."
@@ -210,6 +215,23 @@ final class ModelManagerController: ObservableObject {
     private func cacheCatalog(_ data: Data) throws {
         try FileManager.default.createDirectory(at: store.rootURL, withIntermediateDirectories: true)
         try data.write(to: cachedCatalogURL, options: .atomic)
+    }
+
+    private func persistDownloadedArchive(at temporaryURL: URL) throws -> URL {
+        let downloads = store.rootURL.appendingPathComponent("Downloads", isDirectory: true)
+        try FileManager.default.createDirectory(at: downloads, withIntermediateDirectories: true)
+        let destination = downloads
+            .appendingPathComponent(UUID().uuidString, isDirectory: false)
+            .appendingPathExtension("zip")
+        do {
+            try FileManager.default.moveItem(at: temporaryURL, to: destination)
+        } catch {
+            // Moving can fail if the URLSession temporary directory is on another
+            // volume. A copy still gives us ownership beyond CFNetwork's lifetime.
+            try FileManager.default.copyItem(at: temporaryURL, to: destination)
+            try? FileManager.default.removeItem(at: temporaryURL)
+        }
+        return destination
     }
 
     private func catalogFailureMessage(for error: Error) -> String {
