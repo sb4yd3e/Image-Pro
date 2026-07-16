@@ -114,13 +114,6 @@ private struct TopToolbar: View {
 
     var body: some View {
         HStack(spacing: 10) {
-            WindowTitleDragRegion {
-                Text("Image Pro")
-                    .font(.title3.bold())
-                    .padding(.trailing, 2)
-            }
-            Divider()
-                .frame(height: 22)
             Button("Open", systemImage: "folder") { model.chooseImage() }
                 .disabled(model.isWorking)
                 .accessibilityLabel("Open Image")
