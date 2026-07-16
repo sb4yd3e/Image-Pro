@@ -1,0 +1,4 @@
+module CWebPBridge {
+    header "CWebPBridge.h"
+    export *
+}

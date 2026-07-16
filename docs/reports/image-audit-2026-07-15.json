@@ -1,0 +1,261 @@
+{
+  "failed" : 0,
+  "generatedAt" : "2026-07-15T13:45:39Z",
+  "passed" : 28,
+  "records" : [
+    {
+      "height" : 512,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/a_high_quality_photo_of_an_astronaut_riding_a_dragon_in_space\/randomSeed_11_computeUnit_CPU_AND_GPU_modelVersion_runwayml_stable-diffusion-v1-5.png",
+      "previewHeight" : 512,
+      "previewWidth" : 512,
+      "sourceBytes" : 404542,
+      "suggestedFormat" : "JPEG",
+      "width" : 512
+    },
+    {
+      "height" : 512,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/a_high_quality_photo_of_an_astronaut_riding_a_dragon_in_space\/randomSeed_11_computeUnit_CPU_AND_NE_modelVersion_runwayml_stable-diffusion-v1-5.png",
+      "previewHeight" : 512,
+      "previewWidth" : 512,
+      "sourceBytes" : 440663,
+      "suggestedFormat" : "JPEG",
+      "width" : 512
+    },
+    {
+      "height" : 512,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/a_high_quality_photo_of_an_astronaut_riding_a_dragon_in_space\/randomSeed_93_computeUnit_ALL_modelVersion_stabilityai_stable-diffusion-2-base.png",
+      "previewHeight" : 512,
+      "previewWidth" : 512,
+      "sourceBytes" : 519318,
+      "suggestedFormat" : "JPEG",
+      "width" : 512
+    },
+    {
+      "height" : 512,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/a_high_quality_photo_of_an_astronaut_riding_a_dragon_in_space\/randomSeed_93_computeUnit_CPU_AND_GPU_modelVersion_stabilityai_stable-diffusion-2-base.png",
+      "previewHeight" : 512,
+      "previewWidth" : 512,
+      "sourceBytes" : 532303,
+      "suggestedFormat" : "JPEG",
+      "width" : 512
+    },
+    {
+      "height" : 512,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/a_high_quality_photo_of_an_astronaut_riding_a_dragon_in_space\/randomSeed_93_computeUnit_CPU_AND_NE_modelVersion_stabilityai_stable-diffusion-2-base.png",
+      "previewHeight" : 512,
+      "previewWidth" : 512,
+      "sourceBytes" : 519465,
+      "suggestedFormat" : "JPEG",
+      "width" : 512
+    },
+    {
+      "height" : 512,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/a_high_quality_photo_of_an_astronaut_riding_a_dragon_in_space\/randomSeed_123456789_computeUnit_ALL_modelVersion_CompVis_stable-diffusion-v1-4.png",
+      "previewHeight" : 512,
+      "previewWidth" : 512,
+      "sourceBytes" : 454504,
+      "suggestedFormat" : "JPEG",
+      "width" : 512
+    },
+    {
+      "height" : 512,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/a_high_quality_photo_of_an_astronaut_riding_a_dragon_in_space\/randomSeed_123456789_computeUnit_CPU_AND_GPU_modelVersion_CompVis_stable-diffusion-v1-4.png",
+      "previewHeight" : 512,
+      "previewWidth" : 512,
+      "sourceBytes" : 438718,
+      "suggestedFormat" : "JPEG",
+      "width" : 512
+    },
+    {
+      "height" : 512,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/a_high_quality_photo_of_an_astronaut_riding_a_dragon_in_space\/randomSeed_123456789_computeUnit_CPU_AND_NE_modelVersion_CompVis_stable-diffusion-v1-4.png",
+      "previewHeight" : 512,
+      "previewWidth" : 512,
+      "sourceBytes" : 454975,
+      "suggestedFormat" : "JPEG",
+      "width" : 512
+    },
+    {
+      "height" : 512,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/a_high_quality_photo_of_an_astronaut_riding_a_horse_in_space\/randomSeed_11_computeUnit_CPU_AND_GPU_modelVersion_stabilityai_stable-diffusion-2-base.png",
+      "previewHeight" : 512,
+      "previewWidth" : 512,
+      "sourceBytes" : 432948,
+      "suggestedFormat" : "JPEG",
+      "width" : 512
+    },
+    {
+      "height" : 512,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/a_high_quality_photo_of_an_astronaut_riding_a_horse_in_space\/randomSeed_11_computeUnit_CPU_AND_NE_modelVersion_stabilityai_stable-diffusion-2-base.png",
+      "previewHeight" : 512,
+      "previewWidth" : 512,
+      "sourceBytes" : 437025,
+      "suggestedFormat" : "JPEG",
+      "width" : 512
+    },
+    {
+      "height" : 512,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/a_high_quality_photo_of_an_astronaut_riding_a_horse_in_space\/randomSeed_13_computeUnit_ALL_modelVersion_CompVis_stable-diffusion-v1-4.png",
+      "previewHeight" : 512,
+      "previewWidth" : 512,
+      "sourceBytes" : 478629,
+      "suggestedFormat" : "JPEG",
+      "width" : 512
+    },
+    {
+      "height" : 512,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/a_high_quality_photo_of_an_astronaut_riding_a_horse_in_space\/randomSeed_13_computeUnit_CPU_AND_GPU_modelVersion_CompVis_stable-diffusion-v1-4.png",
+      "previewHeight" : 512,
+      "previewWidth" : 512,
+      "sourceBytes" : 456426,
+      "suggestedFormat" : "JPEG",
+      "width" : 512
+    },
+    {
+      "height" : 512,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/a_high_quality_photo_of_an_astronaut_riding_a_horse_in_space\/randomSeed_13_computeUnit_CPU_AND_NE_modelVersion_CompVis_stable-diffusion-v1-4.png",
+      "previewHeight" : 512,
+      "previewWidth" : 512,
+      "sourceBytes" : 478792,
+      "suggestedFormat" : "JPEG",
+      "width" : 512
+    },
+    {
+      "height" : 512,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/a_high_quality_photo_of_an_astronaut_riding_a_horse_in_space\/randomSeed_93_computeUnit_ALL_modelVersion_runwayml_stable-diffusion-v1-5.png",
+      "previewHeight" : 512,
+      "previewWidth" : 512,
+      "sourceBytes" : 471595,
+      "suggestedFormat" : "JPEG",
+      "width" : 512
+    },
+    {
+      "height" : 512,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/a_high_quality_photo_of_an_astronaut_riding_a_horse_in_space\/randomSeed_93_computeUnit_CPU_AND_GPU_modelVersion_runwayml_stable-diffusion-v1-5.png",
+      "previewHeight" : 512,
+      "previewWidth" : 512,
+      "sourceBytes" : 466664,
+      "suggestedFormat" : "JPEG",
+      "width" : 512
+    },
+    {
+      "height" : 512,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/a_high_quality_photo_of_an_astronaut_riding_a_horse_in_space\/randomSeed_93_computeUnit_CPU_AND_NE_modelVersion_runwayml_stable-diffusion-v1-5.png",
+      "previewHeight" : 512,
+      "previewWidth" : 512,
+      "sourceBytes" : 471824,
+      "suggestedFormat" : "JPEG",
+      "width" : 512
+    },
+    {
+      "height" : 512,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/controlnet_readme_reel.png",
+      "previewHeight" : 512,
+      "previewWidth" : 2048,
+      "sourceBytes" : 1572193,
+      "suggestedFormat" : "JPEG",
+      "width" : 2048
+    },
+    {
+      "height" : 512,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/float16_cpuandne_readmereel.png",
+      "previewHeight" : 410,
+      "previewWidth" : 2048,
+      "sourceBytes" : 2273618,
+      "suggestedFormat" : "JPEG",
+      "width" : 2560
+    },
+    {
+      "height" : 512,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/float16_gpu_readmereel.png",
+      "previewHeight" : 410,
+      "previewWidth" : 2048,
+      "sourceBytes" : 2269000,
+      "suggestedFormat" : "JPEG",
+      "width" : 2560
+    },
+    {
+      "height" : 1024,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/mbp\/a_high_quality_photo_of_a_surfing_dog.7667.final_3.41-bits.png",
+      "previewHeight" : 1024,
+      "previewWidth" : 1024,
+      "sourceBytes" : 1612408,
+      "suggestedFormat" : "PNG",
+      "width" : 1024
+    },
+    {
+      "height" : 1024,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/mbp\/a_high_quality_photo_of_a_surfing_dog.7667.final_4.50-bits.png",
+      "previewHeight" : 1024,
+      "previewWidth" : 1024,
+      "sourceBytes" : 1558829,
+      "suggestedFormat" : "PNG",
+      "width" : 1024
+    },
+    {
+      "height" : 1024,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/mbp\/a_high_quality_photo_of_a_surfing_dog.7667.final_6.55-bits.png",
+      "previewHeight" : 1024,
+      "previewWidth" : 1024,
+      "sourceBytes" : 1590489,
+      "suggestedFormat" : "PNG",
+      "width" : 1024
+    },
+    {
+      "height" : 1024,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/mbp\/a_high_quality_photo_of_a_surfing_dog.7667.final_float16_original.png",
+      "previewHeight" : 1024,
+      "previewWidth" : 1024,
+      "sourceBytes" : 1633673,
+      "suggestedFormat" : "JPEG",
+      "width" : 1024
+    },
+    {
+      "height" : 500,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/mbp\/runwayml_stable-diffusion-v1-5_psnr_vs_size.png",
+      "previewHeight" : 500,
+      "previewWidth" : 700,
+      "sourceBytes" : 57321,
+      "suggestedFormat" : "PNG",
+      "width" : 700
+    },
+    {
+      "height" : 500,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/mbp\/stabilityai_stable-diffusion-2-1-base_psnr_vs_size.png",
+      "previewHeight" : 500,
+      "previewWidth" : 700,
+      "sourceBytes" : 65547,
+      "suggestedFormat" : "PNG",
+      "width" : 700
+    },
+    {
+      "height" : 500,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/mbp\/stabilityai_stable-diffusion-xl-base-1.0_psnr_vs_size.png",
+      "previewHeight" : 500,
+      "previewWidth" : 700,
+      "sourceBytes" : 58094,
+      "suggestedFormat" : "PNG",
+      "width" : 700
+    },
+    {
+      "height" : 512,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/palette6_cpuandne_readmereel.png",
+      "previewHeight" : 410,
+      "previewWidth" : 2048,
+      "sourceBytes" : 2308829,
+      "suggestedFormat" : "JPEG",
+      "width" : 2560
+    },
+    {
+      "height" : 512,
+      "path" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets\/readme_reel.png",
+      "previewHeight" : 512,
+      "previewWidth" : 1536,
+      "sourceBytes" : 1414784,
+      "suggestedFormat" : "JPEG",
+      "width" : 1536
+    }
+  ],
+  "rootPath" : "\/Users\/exd\/Documents\/Image Pro\/.build\/checkouts\/ml-stable-diffusion\/assets",
+  "total" : 28
+}

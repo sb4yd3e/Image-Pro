@@ -1,0 +1,10 @@
+.DS_Store
+.build/
+.swiftpm/
+DerivedData/
+*.xcuserstate
+*.imagepro/recovery/
+Models/Bundled/
+Models/Optional/
+Benchmarks/Outputs/
+dist/

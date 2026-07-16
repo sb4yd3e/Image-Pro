@@ -1,0 +1,13 @@
+{
+  "decodeMilliseconds" : 77.366291,
+  "generatedAt" : "2026-07-15T15:38:18Z",
+  "height" : 4000,
+  "inspectMilliseconds" : 7.665125,
+  "optimizeMilliseconds" : 190.2625,
+  "path" : "\/tmp\/image-pro-24mp.jpg",
+  "peakResidentMemoryBytes" : 417497088,
+  "previewMilliseconds" : 116.516042,
+  "residentMemoryBytes" : 232685568,
+  "sourceBytes" : 2591928,
+  "width" : 6000
+}

@@ -1,0 +1,17 @@
+"Language & Appearance" = "Language & Appearance";
+"Choose the language used throughout Image Pro." = "Choose the language used throughout Image Pro.";
+"App Language" = "App Language";
+"English" = "English";
+"Thai" = "Thai";
+"The interface updates immediately. Your images and projects are not changed." = "The interface updates immediately. Your images and projects are not changed.";
+"Software Updates" = "Software Updates";
+"Automatically check once a day" = "Automatically check once a day";
+"Current version %@" = "Current version %@";
+"Check Now" = "Check Now";
+"Check for Updates…" = "Check for Updates…";
+"View Release" = "View Release";
+"Download and Install" = "Download and Install";
+"Processing batch…" = "Processing batch…";
+"Result appears after Optimize" = "Result appears after Optimize";
+"Reduced %lld%%" = "Reduced %lld%%";
+"Paint over the complete object and its shadow. Smart Erase expands the mask, rebuilds surrounding texture, and blends edges entirely offline." = "Paint over the complete object and its shadow. Smart Erase expands the mask, rebuilds surrounding texture, and blends edges entirely offline.";

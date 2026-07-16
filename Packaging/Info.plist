@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>CFBundleLocalizations</key>
+    <array>
+        <string>en</string>
+        <string>th</string>
+    </array>
+    <key>CFBundleDisplayName</key>
+    <string>Image Pro</string>
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
+    <key>CFBundleExecutable</key>
+    <string>ImageProApp</string>
+    <key>CFBundleIdentifier</key>
+    <string>local.imagepro.app</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>Image Pro</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleDocumentTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeName</key>
+            <string>Image</string>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>LSHandlerRank</key>
+            <string>Alternate</string>
+            <key>LSItemContentTypes</key>
+            <array>
+                <string>public.image</string>
+            </array>
+        </dict>
+        <dict>
+            <key>CFBundleTypeName</key>
+            <string>Image Pro Project</string>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>LSHandlerRank</key>
+            <string>Owner</string>
+            <key>LSTypeIsPackage</key>
+            <true/>
+            <key>LSItemContentTypes</key>
+            <array>
+                <string>local.imagepro.project</string>
+            </array>
+        </dict>
+    </array>
+    <key>UTExportedTypeDeclarations</key>
+    <array>
+        <dict>
+            <key>UTTypeIdentifier</key>
+            <string>local.imagepro.project</string>
+            <key>UTTypeDescription</key>
+            <string>Image Pro Project</string>
+            <key>UTTypeConformsTo</key>
+            <array>
+                <string>com.apple.package</string>
+            </array>
+            <key>UTTypeTagSpecification</key>
+            <dict>
+                <key>public.filename-extension</key>
+                <array>
+                    <string>imagepro</string>
+                </array>
+            </dict>
+        </dict>
+    </array>
+    <key>CFBundleShortVersionString</key>
+    <string>0.2.0</string>
+    <key>CFBundleVersion</key>
+    <string>2</string>
+    <key>LSApplicationCategoryType</key>
+    <string>public.app-category.photography</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>14.0</string>
+    <key>NSHighResolutionCapable</key>
+    <true/>
+    <key>NSServices</key>
+    <array>
+        <dict>
+            <key>NSMenuItem</key>
+            <dict>
+                <key>default</key>
+                <string>Image Pro: Auto Remove Background</string>
+            </dict>
+            <key>NSMessage</key>
+            <string>autoRemoveBackground</string>
+            <key>NSPortName</key>
+            <string>ImageProApp</string>
+            <key>NSSendTypes</key>
+            <array>
+                <string>public.file-url</string>
+            </array>
+        </dict>
+        <dict>
+            <key>NSMenuItem</key>
+            <dict>
+                <key>default</key>
+                <string>Image Pro: Optimize Image</string>
+            </dict>
+            <key>NSMessage</key>
+            <string>optimizeImage</string>
+            <key>NSPortName</key>
+            <string>ImageProApp</string>
+            <key>NSSendTypes</key>
+            <array>
+                <string>public.file-url</string>
+            </array>
+        </dict>
+    </array>
+    <key>NSPrincipalClass</key>
+    <string>NSApplication</string>
+    <key>NSSupportsAutomaticGraphicsSwitching</key>
+    <true/>
+</dict>
+</plist>
