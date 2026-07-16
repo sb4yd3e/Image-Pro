@@ -114,9 +114,11 @@ private struct TopToolbar: View {
 
     var body: some View {
         HStack(spacing: 10) {
-            Text("Image Pro")
-                .font(.title3.bold())
-                .padding(.trailing, 2)
+            WindowTitleDragRegion {
+                Text("Image Pro")
+                    .font(.title3.bold())
+                    .padding(.trailing, 2)
+            }
             Divider()
                 .frame(height: 22)
             Button("Open", systemImage: "folder") { model.chooseImage() }
@@ -153,7 +155,8 @@ private struct TopToolbar: View {
                 .help("Export the current result. Choose Optimize for format and quality controls.")
                 .disabled(model.activeData == nil || model.isWorking)
                 .accessibilityLabel("Export Image")
-            Spacer()
+            WindowTitleDragRegion()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             Picker("Compare", selection: $model.comparisonMode) {
                 ForEach(AppModel.ComparisonMode.allCases) { mode in
                     Text(LocalizedStringKey(mode.rawValue)).tag(mode)
@@ -192,6 +195,50 @@ private struct TopToolbar: View {
         .buttonStyle(.borderless)
         .padding(.horizontal, 18)
         .frame(height: 60)
+    }
+}
+
+/// A native title-bar region that preserves normal macOS window behavior without
+/// placing an invisible gesture over toolbar controls. Dragging moves the window;
+/// double-clicking zooms/maximizes it just like a standard title bar.
+private struct WindowTitleDragRegion<Content: View>: View {
+    @ViewBuilder let content: () -> Content
+
+    init(@ViewBuilder content: @escaping () -> Content) {
+        self.content = content
+    }
+
+    var body: some View {
+        ZStack {
+            WindowTitleDragView()
+            content()
+                .allowsHitTesting(false)
+        }
+    }
+}
+
+private extension WindowTitleDragRegion where Content == Color {
+    init() {
+        self.init { Color.clear }
+    }
+}
+
+private struct WindowTitleDragView: NSViewRepresentable {
+    func makeNSView(context: Context) -> NSView {
+        TitleDragNSView()
+    }
+
+    func updateNSView(_ nsView: NSView, context: Context) {}
+
+    private final class TitleDragNSView: NSView {
+        override func mouseDown(with event: NSEvent) {
+            guard let window else { return }
+            if event.clickCount == 2 {
+                window.performZoom(nil)
+            } else {
+                window.performDrag(with: event)
+            }
+        }
     }
 }
 
